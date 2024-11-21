@@ -12,6 +12,9 @@ def main():
     service = StudentDataService(students)
     print(service.get_students())
 
+    student = Student(id=1, first_name="John", last_name="Doe", grade_point=4, status=Status.ACTIVE)
+    print(student.__dict__)
+
 
 if __name__ == '__main__':
     main()
