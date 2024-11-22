@@ -22,7 +22,15 @@ def repository(sample_students):
     return StudentRepository(data_service)
 
 
-def test_highest_grade_point(repository):
+def test_init():
+    with pytest.raises(ValueError):
+        StudentRepository(None)
+
+    with pytest.raises(ValueError):
+        StudentRepository('wrong type')
+
+
+def test_highest_grade_point(repository):  # "test_" is a pytest convention to identify test functions
     assert repository.highest_grade_point() == 4.0
 
 
