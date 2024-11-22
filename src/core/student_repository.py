@@ -22,9 +22,21 @@ class StudentRepository:
 
     def average_grade_point(self, status: Status = None) -> float:
         if status:
-            filtered_df = self._df[self._df[self.STATUS_COLUMN] == status]
+            # Extract the 'status' column from the DataFrame
+            status_column = self._df[self.STATUS_COLUMN]
+
+            # Create a boolean mask for rows where the status matches the given status
+            matching_status_mask = status_column == status
+
+            # Filter the DataFrame based on the boolean mask
+            filtered_df = self._df[matching_status_mask]
+
+            # Check if the filtered DataFrame is empty
             if filtered_df.empty:
                 return 0.0
+
+            # Calculate the average grade point for the filtered rows
             return filtered_df[self.GRADE_POINT_COLUMN].mean()
 
+        # If no status is provided, calculate the overall average grade point
         return self._df[self.GRADE_POINT_COLUMN].mean()
